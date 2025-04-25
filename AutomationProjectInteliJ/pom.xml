@@ -30,6 +30,13 @@
             <artifactId>extentreports</artifactId>
             <version>5.0.9</version>
         </dependency>
+        <!-- WebDriverManager for automatic driver management -->
+        <dependency>
+            <groupId>io.github.bonigarcia</groupId>
+            <artifactId>webdrivermanager</artifactId>
+            <version>5.8.0</version>
+        </dependency>
+
     </dependencies>
 
     <build>

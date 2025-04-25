@@ -1,10 +1,12 @@
 package utilities;
 
+import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import java.time.Duration;
+
 
 public class BaseTest {
     protected WebDriver driver;
@@ -12,7 +14,7 @@ public class BaseTest {
     @BeforeClass
     public void setUp() {
         // Set the path to the updated chromedriver executable
-        System.setProperty("webdriver.chrome.driver", "E://WebDrivers//chromedriver.exe");
+        WebDriverManager.chromedriver().setup();
 
         // Initialize the WebDriver
         driver = new ChromeDriver();

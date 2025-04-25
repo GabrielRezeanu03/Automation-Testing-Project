@@ -135,23 +135,47 @@ public class UserInterfacePage {
 
     // Method to set a specific date in the date picker
     public void setDate(String expectedMonthYear, String day) {
-        // Click the date input field to open the date picker
-        WebElement datePickerInput = driver.findElement(By.id("datepicker")); // Assuming the ID is "datepicker"
-        datePickerInput.click();
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 
-        // Find the month-year header
-        WebElement datePickerHeader = driver.findElement(By.className("ui-datepicker-title"));
-
-        // Loop until the expected month and year are found
-        while (!datePickerHeader.getText().equals(expectedMonthYear)) {
-            // Click the next button (right arrow) to move to the next month
-            WebElement nextButton = driver.findElement(By.className("ui-datepicker-next"));
-            nextButton.click();
-            datePickerHeader = driver.findElement(By.className("ui-datepicker-title")); // Update the header after clicking
+        // Închide cookie banner dacă apare
+        try {
+            WebElement cookieBanner = driver.findElement(By.id("cookieChoiceDismiss"));
+            if (cookieBanner.isDisplayed()) {
+                cookieBanner.click();
+                System.out.println("Cookie banner closed.");
+            }
+        } catch (Exception e) {
+            System.out.println("No cookie banner present.");
         }
 
-        // Once the correct month-year is found, select the day
-        WebElement dayElement = driver.findElement(By.xpath("//a[text()='" + day + "']"));
+        // Deschide datepicker-ul
+        WebElement datePickerInput = wait.until(ExpectedConditions.elementToBeClickable(By.id("datepicker")));
+        datePickerInput.click();
+
+        int maxTries = 24; // max 2 ani în avans
+        int tries = 0;
+
+        while (tries < maxTries) {
+            WebElement header = wait.until(ExpectedConditions.visibilityOfElementLocated(By.className("ui-datepicker-title")));
+            String currentMonthYear = header.getText().trim();
+
+            if (currentMonthYear.equals(expectedMonthYear)) {
+                break;
+            }
+
+            WebElement nextButton = wait.until(ExpectedConditions.elementToBeClickable(By.className("ui-datepicker-next")));
+            nextButton.click();
+
+            // Așteaptă schimbarea lunii
+            wait.until(ExpectedConditions.not(
+                    ExpectedConditions.textToBePresentInElementLocated(By.className("ui-datepicker-title"), currentMonthYear)
+            ));
+
+            tries++;
+        }
+
+        // Selectează ziua dorită
+        WebElement dayElement = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//a[text()='" + day + "']")));
         dayElement.click();
 
         System.out.println("Date selected: " + day + " " + expectedMonthYear);
