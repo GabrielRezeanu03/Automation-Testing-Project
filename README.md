@@ -1,4 +1,3 @@
----
 **About Me:**  
 I'm passionate about turning testing theory into practice through real-world automation projects. I enjoy building reliable frameworks and learning new tools to grow as a QA Engineer.
 ---
