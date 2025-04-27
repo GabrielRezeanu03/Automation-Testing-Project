@@ -1,6 +1,6 @@
 ---
 **About Me:**  
-Junior QA Automation Engineer passionate about building reliable test automation frameworks and continuously improving quality assurance processes.
+I'm passionate about turning testing theory into practice through real-world automation projects. I enjoy building reliable frameworks and learning new tools to grow as a QA Engineer.
 ---
 
 # UI Automation Practice – Test Automation Practice Blog
@@ -94,4 +94,3 @@ It is not affiliated with any company, client, or external organization.
 
 ---
 
-# Happy Testing!
