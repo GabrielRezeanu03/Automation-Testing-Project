@@ -46,7 +46,6 @@ This site offers a variety of UI elements ideal for practicing different types o
   mvn -Dtest=UserInterfaceTest test
   ```
 
-Test results will be available under `target/surefire-reports/`.
 
 ---
 
